@@ -64,6 +64,10 @@ if(UNIX AND NOT APPLE)
     install(FILES packaging/goudanow/com.goudanow.goudagames.svg
         DESTINATION "${CMAKE_INSTALL_DATADIR}/icons/hicolor/scalable/apps")
     foreach(size IN LISTS OPENNOW_APPLICATION_ICON_SIZES)
+        # Flatpak rejects exported icons larger than 512x512; the SVG covers bigger sizes.
+        if(size GREATER 512)
+            continue()
+        endif()
         install(FILES "packaging/icons/opennow-${size}.png"
             DESTINATION "${CMAKE_INSTALL_DATADIR}/icons/hicolor/${size}x${size}/apps"
             RENAME com.goudanow.goudagames.png)
