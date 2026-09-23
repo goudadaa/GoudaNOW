@@ -11,7 +11,7 @@ ApplicationWindow {
     visible: true
     visibility: ApplicationWindow.Windowed
     color: "black"
-    title: qsTr("OpenNOW")
+    title: qsTr("GoudaNOW")
 
     Component { id: hdrPopupEffect; HdrChromeEffect {} }
     Binding { target: window.Overlay.overlay.layer; property: "enabled"; value: HdrOutput.chromeRequired }
@@ -53,7 +53,9 @@ ApplicationWindow {
     property bool startupModeApplied: false
     property bool startupConsoleRequested: false
     property double lastControllerDiagnosticMs: 0
-    property bool forceConsole: false
+    // GoudaNOW always opens on its Switch-style HOME menu (the console surface).
+    // F10 still switches to the desktop layout for mouse-and-keyboard use.
+    property bool forceConsole: true
     property bool launchModeOverridden: false
     readonly property string effectiveLaunchMode: launchModeOverridden ? "" : LaunchModeOverride
     property bool streamStatsAutoShown: false
@@ -454,7 +456,9 @@ ApplicationWindow {
             return storeScreen
         if (route === "theme-store")
             return themeStoreScreen
-        if (route === "settings" || route === "settings-streaming")
+        if (route === "settings")
+            return goudaSettingsScreen
+        if (route === "settings-streaming")
             return settingsStreamingScreen
         if (route === "controllers" || route === "settings-input")
             return settingsInputScreen
@@ -833,8 +837,11 @@ ApplicationWindow {
 
     Component { id: desktopAppScreen; DesktopApp {} }
     Component { id: onboardingScreen; DesktopOnboardingScreen {} }
-    Component { id: homeScreen; HomeScreen {} }
-    Component { id: libraryScreen; LibraryScreen {} }
+    // GoudaNOW Switch-style screens replace the stock console Home, Library,
+    // sign-in, queue and settings entry. Every other route keeps the stock screen.
+    Component { id: homeScreen; GoudaHomeScreen {} }
+    Component { id: libraryScreen; GoudaLibraryScreen {} }
+    Component { id: goudaSettingsScreen; GoudaSettingsScreen {} }
     Component { id: storeScreen; StoreScreen {} }
     Component { id: themeStoreScreen; ThemeStoreScreen {} }
     Component { id: settingsStreamingScreen; SettingsScreen { initialSection: 1 } }
@@ -854,9 +861,9 @@ ApplicationWindow {
             previewGame: SmokeTestMode ? SmokeTestGame : null
         }
     }
-    Component { id: signInScreen; SignInScreen {} }
+    Component { id: signInScreen; GoudaSignInScreen {} }
     Component { id: joiningScreen; JoiningScreen {} }
-    Component { id: insertingScreen; InsertingScreen {} }
+    Component { id: insertingScreen; GoudaInsertingScreen {} }
     Component { id: streamScreen; StreamScreen {} }
     Component { id: accountsScreen; AccountsScreen {} }
     Component { id: profilePinScreen; ProfilePinScreen {} }

@@ -941,7 +941,13 @@ QtObject {
         }, 120000)
     }
 
+    // GoudaNOW has no update feed of its own; OpenNOW's releases must never be offered
+    // (installing one would replace GoudaNOW with upstream OpenNOW).
+    readonly property bool upstreamUpdatesEnabled: false
+
     function checkForUpdates() {
+        if (!upstreamUpdatesEnabled)
+            return
         if (!ready || updaterBusy || updaterState.canCheck !== true)
             return
         updaterError = ""
@@ -951,6 +957,8 @@ QtObject {
     }
 
     function downloadUpdate() {
+        if (!upstreamUpdatesEnabled)
+            return
         if (!ready || updaterBusy || updaterState.canDownload !== true)
             return
         updaterError = ""
@@ -1026,12 +1034,24 @@ QtObject {
     }
 
     function syncTelemetry() {
+        // GoudaNOW: anonymous error reports would go to OpenNOW's analytics project.
+        if (!upstreamReportsEnabled)
+            return
         if (!ready || telemetryRequestId !== "")
             return
         telemetryRequestId = CoreClient.request("telemetry.sync", {}, 30000)
     }
 
+    // GoudaNOW is a fork: feedback and bug reports would reach OpenNOW's maintainers.
+    readonly property bool upstreamReportsEnabled: false
+    readonly property string reportsUnavailableMessage: qsTr("Feedback and bug reports aren't available in GoudaNOW. Please report problems on the GoudaNOW GitHub page.")
+
     function submitFeedback(category, message) {
+        if (!upstreamReportsEnabled) {
+            reportingState = "error"
+            lastError = reportsUnavailableMessage
+            return
+        }
         if (!ready || feedbackRequestId !== "")
             return
         reportingState = "submitting"
@@ -1044,6 +1064,11 @@ QtObject {
     }
 
     function submitBugReport(title, description, includeDiagnostics) {
+        if (!upstreamReportsEnabled) {
+            reportingState = "error"
+            lastError = reportsUnavailableMessage
+            return
+        }
         if (!ready || bugReportRequestId !== "")
             return
         reportingState = "submitting"

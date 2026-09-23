@@ -1,4 +1,5 @@
 set_source_files_properties(qml/theme/Theme.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
+set_source_files_properties(qml/goudanow/GoudaTheme.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 set_source_files_properties(qml/state/ShellStore.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 set_source_files_properties(qml/desktop/components/DesktopTokens.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 set_source_files_properties(qml/components/InputPromptIcons.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
@@ -325,6 +326,20 @@ qt_add_qml_module(opennow-qt
         qml/overlays/QuickSettingsOverlay.qml
         qml/overlays/SessionConflictOverlay.qml
         qml/overlays/SessionReportOverlay.qml
+        qml/goudanow/GoudaTheme.qml
+        qml/goudanow/GoudaFocusRing.qml
+        qml/goudanow/GoudaHints.qml
+        qml/goudanow/GoudaFrame.qml
+        qml/goudanow/GoudaListRow.qml
+        qml/goudanow/GoudaSectionLabel.qml
+        qml/goudanow/GoudaDialog.qml
+        qml/goudanow/GoudaPill.qml
+        qml/goudanow/GoudaMarquee.qml
+        qml/goudanow/GoudaHomeScreen.qml
+        qml/goudanow/GoudaLibraryScreen.qml
+        qml/goudanow/GoudaSettingsScreen.qml
+        qml/goudanow/GoudaSignInScreen.qml
+        qml/goudanow/GoudaInsertingScreen.qml
         qml/screens/AccountsScreen.qml
         qml/screens/DiagnosticsScreen.qml
         qml/screens/FeedbackScreen.qml
@@ -352,6 +367,26 @@ qt_add_qml_module(opennow-qt
         qml/state/settings/OnboardingState.qml
         qml/theme/Theme.qml
     RESOURCES
+        res/goudanow/apps-cyan.svg
+        res/goudanow/apps-grey.svg
+        res/goudanow/apps-white.svg
+        res/goudanow/controller-cyan.svg
+        res/goudanow/controller-grey.svg
+        res/goudanow/controller-white.svg
+        res/goudanow/goudanow-icon.png
+        res/goudanow/goudanow-mark.png
+        res/goudanow/power-cyan.svg
+        res/goudanow/power-grey.svg
+        res/goudanow/power-white.svg
+        res/goudanow/search-cyan.svg
+        res/goudanow/search-grey.svg
+        res/goudanow/search-white.svg
+        res/goudanow/settings-cyan.svg
+        res/goudanow/settings-grey.svg
+        res/goudanow/settings-white.svg
+        res/goudanow/wifi-cyan.svg
+        res/goudanow/wifi-grey.svg
+        res/goudanow/wifi-white.svg
         ${OPENNOW_CONTROLLER_ICON_FILES}
         ${OPENNOW_KEYBOARD_ICON_FILES}
         res/icons/nav-home.svg

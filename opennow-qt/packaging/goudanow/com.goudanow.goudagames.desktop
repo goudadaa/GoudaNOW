@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=GoudaNOW
+Comment=Controller-first cloud gaming with a console-style HOME menu
+Exec=opennow-qt %U
+Icon=com.goudanow.goudagames
+Terminal=false
+Categories=Game;Network;
+Keywords=cloud;gaming;controller;steam deck;
+StartupNotify=true
+StartupWMClass=GoudaNOW

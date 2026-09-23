@@ -1,0 +1,55 @@
+name: GoudaNOW Flatpak (Steam Deck)
+
+# Builds the GoudaNOW Linux app as a Flatpak bundle for the Steam Deck (x86_64).
+# Run it from the Actions tab ("Run workflow"), or push to the linux/switch-home branch.
+on:
+  workflow_dispatch:
+  push:
+    branches: [linux/switch-home]
+
+permissions:
+  contents: read
+
+jobs:
+  flatpak:
+    name: Flatpak x86_64
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    env:
+      APP_ID: com.goudanow.goudagames
+      MANIFEST: opennow-qt/packaging/flatpak/com.goudanow.goudagames.json
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Install Flatpak tools and SDK
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y flatpak flatpak-builder
+          flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+          flatpak install --user --noninteractive -y flathub \
+            org.kde.Platform//6.10 org.kde.Sdk//6.10 \
+            org.freedesktop.Sdk.Extension.rust-stable//25.08 \
+            org.freedesktop.Sdk.Extension.llvm20//25.08
+      - name: Vendor locked Rust dependencies for the offline build
+        run: python3 opennow-qt/packaging/flatpak/prepare_sources.py
+      - name: Build without network access and export bundle
+        run: |
+          flatpak-builder --user --force-clean --jobs=4 \
+            --state-dir=build/flatpak/state --repo=build/flatpak/repo \
+            build/flatpak/app "$MANIFEST"
+          flatpak build-bundle build/flatpak/repo build/flatpak/GoudaNOW-x86_64.flatpak \
+            "$APP_ID" master \
+            --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo
+      - name: Install and verify the exported bundle
+        env:
+          OPENNOW_FLATPAK_APP_ID: com.goudanow.goudagames
+        run: |
+          flatpak install --user --noninteractive -y build/flatpak/GoudaNOW-x86_64.flatpak
+          python3 opennow-qt/packaging/verify_flatpak.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: goudanow-flatpak-x86_64
+          path: build/flatpak/GoudaNOW-x86_64.flatpak
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 0

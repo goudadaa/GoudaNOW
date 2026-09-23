@@ -1,11 +1,12 @@
 import json
+import os
 import select
 import subprocess
 
 from verify_linux_package import verify_capabilities
 
 
-APP_ID = "io.github.opencloudgaming.OpenNOW"
+APP_ID = os.environ.get("OPENNOW_FLATPAK_APP_ID", "io.github.opencloudgaming.OpenNOW")
 
 
 def flatpak_command(command, *arguments):

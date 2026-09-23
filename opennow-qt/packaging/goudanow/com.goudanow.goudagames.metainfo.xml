@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.goudanow.goudagames</id>
+  <name>GoudaNOW</name>
+  <summary>Controller-first cloud gaming with a console-style HOME menu</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <description>
+    <p>GoudaNOW is a controller-first client for your GeForce NOW account, built for the TV and the Steam Deck.</p>
+    <p>Based on OpenNOW by OpenCloudGaming (MIT licence). Not affiliated with NVIDIA or Nintendo.</p>
+  </description>
+  <launchable type="desktop-id">com.goudanow.goudagames.desktop</launchable>
+  <url type="homepage">https://github.com/goudadaa/GoudaNOW</url>
+  <provides>
+    <binary>opennow-qt</binary>
+  </provides>
+  <content_rating type="oars-1.1"/>
+</component>

@@ -56,16 +56,17 @@ install(DIRECTORY packaging/licenses/
 )
 
 if(UNIX AND NOT APPLE)
-    install(FILES packaging/io.github.opencloudgaming.OpenNOW.desktop
+    # GoudaNOW identity (app id com.goudanow.goudagames, matching the Android app).
+    install(FILES packaging/goudanow/com.goudanow.goudagames.desktop
         DESTINATION "${CMAKE_INSTALL_DATADIR}/applications")
-    install(FILES packaging/io.github.opencloudgaming.OpenNOW.metainfo.xml
+    install(FILES packaging/goudanow/com.goudanow.goudagames.metainfo.xml
         DESTINATION "${CMAKE_INSTALL_DATADIR}/metainfo")
-    install(FILES packaging/io.github.opencloudgaming.OpenNOW.svg
+    install(FILES packaging/goudanow/com.goudanow.goudagames.svg
         DESTINATION "${CMAKE_INSTALL_DATADIR}/icons/hicolor/scalable/apps")
     foreach(size IN LISTS OPENNOW_APPLICATION_ICON_SIZES)
         install(FILES "packaging/icons/opennow-${size}.png"
             DESTINATION "${CMAKE_INSTALL_DATADIR}/icons/hicolor/${size}x${size}/apps"
-            RENAME io.github.opencloudgaming.OpenNOW.png)
+            RENAME com.goudanow.goudagames.png)
     endforeach()
 endif()
 

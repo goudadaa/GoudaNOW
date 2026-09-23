@@ -69,9 +69,10 @@ static int runApplicationSession(int argc, char *argv[], QString &restartExecuta
     qputenv("QT_TLS_BACKEND", "schannel");
     QElapsedTimer startupTimer;
     startupTimer.start();
-    QGuiApplication::setApplicationName(u"OpenNOW"_s);
-    QGuiApplication::setOrganizationName(u"OpenCloudGaming"_s);
-    QGuiApplication::setOrganizationDomain(u"opennow.app"_s);
+    // GoudaNOW: own name so its Qt data and single-instance lock never collide with OpenNOW.
+    QGuiApplication::setApplicationName(u"GoudaNOW"_s);
+    QGuiApplication::setOrganizationName(u"GoudaNOW"_s);
+    QGuiApplication::setOrganizationDomain(u"goudanow.com"_s);
     QGuiApplication::setApplicationVersion(QString::fromLatin1(OPENNOW_VERSION));
     QQuickWindow::setDefaultAlphaBuffer(true);
     QQuickWindow::setTextRenderType(QQuickWindow::QtTextRendering);
@@ -85,7 +86,7 @@ static int runApplicationSession(int argc, char *argv[], QString &restartExecuta
     QQuickStyle::setStyle(u"Basic"_s);
 
     QGuiApplication application(argc, argv);
-    QGuiApplication::setDesktopFileName(u"io.github.opencloudgaming.OpenNOW"_s);
+    QGuiApplication::setDesktopFileName(u"com.goudanow.goudagames"_s);
     QIcon applicationIcon;
     for (const int size : {16, 24, 32, 48, 64, 128, 256, 512, 1024})
         applicationIcon.addFile(u":/icons/opennow-%1.png"_s.arg(size), QSize(size, size));
