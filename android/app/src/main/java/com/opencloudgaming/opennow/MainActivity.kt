@@ -2,6 +2,7 @@ package com.opencloudgaming.opennow
 
 import android.Manifest
 import android.app.PictureInPictureParams
+import android.app.UiModeManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -86,12 +87,39 @@ open class MainActivity : ComponentActivity() {
         }
     }
 
+    private var redirectedToTv = false
+
+    /**
+     * GoudaNOW: on a TV, every entry into the stock activity (the LAUNCHER icon used by some TV
+     * launchers, Android Studio's default run, deep links, notification taps) is forwarded to the
+     * Switch-style [com.opencloudgaming.opennow.tv.TvMainActivity] with the original intent.
+     * Phones and tablets keep the stock mobile UI.
+     */
+    private fun redirectToTvActivityIfNeeded(): Boolean {
+        if (javaClass != MainActivity::class.java || !isTelevisionDevice()) return false
+        redirectedToTv = true
+        startActivity(
+            Intent(intent).setClass(this, com.opencloudgaming.opennow.tv.TvMainActivity::class.java)
+        )
+        finish()
+        @Suppress("DEPRECATION")
+        overridePendingTransition(0, 0)
+        return true
+    }
+
+    private fun isTelevisionDevice(): Boolean {
+        val uiModeManager = getSystemService(Context.UI_MODE_SERVICE) as? UiModeManager
+        return uiModeManager?.currentModeType == Configuration.UI_MODE_TYPE_TELEVISION ||
+            packageManager.hasSystemFeature(PackageManager.FEATURE_LEANBACK)
+    }
+
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(localizedAndroidContext(newBase))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (redirectToTvActivityIfNeeded()) return
         enableEdgeToEdge()
         defaultRequestedOrientation = requestedOrientation
         volumeControlStream = AudioManager.STREAM_MUSIC
@@ -420,6 +448,10 @@ open class MainActivity : ComponentActivity() {
     }
 
     override fun onDestroy() {
+        if (redirectedToTv) {
+            super.onDestroy()
+            return
+        }
         if (isFinishing) {
             queueStatusNotifier.cancel()
             // Keep the foreground service alive long enough for onTaskRemoved()
