@@ -29,17 +29,22 @@ android {
     compileSdk = 37
 
     defaultConfig {
-        applicationId = "com.opencloudgaming.opennow"
+        // GoudaNOW has its own identity so it installs alongside the upstream OpenNOW app.
+        applicationId = "com.goudanow.goudagames"
         minSdk = 23
         // Android 17
         // target changes are audited; LAN access is permission-gated at its feature boundary.
         //noinspection EditedTargetSdkVersion
         targetSdk = 37
-        versionCode = 140
-        versionName = "1.8.4"
+        versionCode = 1
+        versionName = "0.1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("boolean", "APK_UPDATES_SUPPORTED", "true")
+        // Upstream OpenNOW's updater, announcements and release feed are not ours to use.
+        buildConfigField("boolean", "APK_UPDATES_SUPPORTED", "false")
+        buildConfigField("boolean", "UPSTREAM_ANNOUNCEMENTS_ENABLED", "false")
+        // Bug reports and diagnostic uploads go to OpenNOW's own maintainers; GoudaNOW must not send them there.
+        buildConfigField("boolean", "UPSTREAM_BUG_REPORTS_ENABLED", "false")
         buildConfigField("boolean", "PLAY_STORE_RELEASE", "false")
         buildConfigField("boolean", "LOCAL_APP_LAUNCHER_SUPPORTED", "true")
 
@@ -57,7 +62,7 @@ android {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
-            buildConfigField("boolean", "APK_UPDATES_SUPPORTED", (!buildingPlayReleaseBundle).toString())
+            buildConfigField("boolean", "APK_UPDATES_SUPPORTED", "false")
             buildConfigField("boolean", "PLAY_STORE_RELEASE", buildingPlayReleaseBundle.toString())
             buildConfigField("boolean", "LOCAL_APP_LAUNCHER_SUPPORTED", (!buildingPlayReleaseBundle).toString())
             proguardFiles(
@@ -180,6 +185,9 @@ dependencies {
     implementation("androidx.media3:media3-exoplayer:1.11.0")
     implementation("androidx.media3:media3-ui:1.11.0")
     implementation("androidx.work:work-runtime:2.11.2")
+    // Compose for TV: Switch-style home in the `tv` package. Lazy layouts come from foundation.
+    implementation("androidx.tv:tv-foundation:1.0.0")
+    implementation("androidx.tv:tv-material:1.1.0")
 
     implementation("io.coil-kt.coil3:coil-compose:3.5.0")
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.5.0")

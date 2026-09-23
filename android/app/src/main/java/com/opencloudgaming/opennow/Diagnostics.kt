@@ -246,6 +246,7 @@ internal suspend fun uploadAndroidDiagnosticPaste(
     http: OkHttpClient,
     sanitizedText: String,
 ): String = withContext(Dispatchers.IO) {
+    check(BuildConfig.UPSTREAM_BUG_REPORTS_ENABLED) { BUG_REPORTS_UNAVAILABLE_MESSAGE }
     val request = Request.Builder()
         .url(ANDROID_DIAGNOSTIC_PASTE_URL)
         .header("Accept", "application/json")

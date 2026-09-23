@@ -64,7 +64,7 @@ class AndroidStreamKeepAliveNotifier(context: Context) {
         }
         cancellationApplied = false
 
-        val title = state.streamGame?.title ?: "OpenNOW"
+        val title = state.streamGame?.title ?: "GoudaNOW"
         val microphoneCaptureActive = shouldPrepareAndroidStreamMicrophone(
             state = state,
             permissionGranted = appContext.checkSelfPermission(Manifest.permission.RECORD_AUDIO) ==
@@ -156,7 +156,7 @@ class AndroidStreamKeepAliveService : Service() {
                 }
                 STREAM_SERVICE_ACTION_START, null -> {
                     startStreamForeground(
-                        title = intent?.getStringExtra(STREAM_SERVICE_EXTRA_TITLE) ?: "OpenNOW",
+                        title = intent?.getStringExtra(STREAM_SERVICE_EXTRA_TITLE) ?: "GoudaNOW",
                         microphoneCaptureActive = intent?.getBooleanExtra(
                             STREAM_SERVICE_EXTRA_MICROPHONE_CAPTURE,
                             false,
@@ -232,7 +232,7 @@ private fun ensureStreamNotificationChannel(context: Context) {
         "Active stream",
         NotificationManager.IMPORTANCE_LOW,
     ).apply {
-        description = "Keeps an active OpenNOW stream connected while the screen is off."
+        description = "Keeps an active GoudaNOW stream connected while the screen is off."
         lockscreenVisibility = Notification.VISIBILITY_PUBLIC
         setShowBadge(false)
     }
@@ -262,7 +262,7 @@ private fun buildStreamNotification(context: Context, title: String): Notificati
         .setSmallIcon(R.drawable.ic_tab_stream)
         .setContentTitle(title)
         .setContentText(localizedAndroidContext(context).getString(R.string.stream_background_notification))
-        .setSubText("OpenNOW")
+        .setSubText("GoudaNOW")
         .setCategory(Notification.CATEGORY_TRANSPORT)
         .setVisibility(Notification.VISIBILITY_PUBLIC)
         .setOngoing(true)

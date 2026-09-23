@@ -1662,6 +1662,8 @@ private fun SettingsContent(
                     searchMode = searchQuery.isNotBlank(),
                 )
             }
+    // GoudaNOW: no bug-report inbox; reports would go to upstream OpenNOW.
+    if (BuildConfig.UPSTREAM_BUG_REPORTS_ENABLED) {
     CategorySettingsSection(selectedCategory, SettingsCategory.BugReports, searchQuery, stringResource(R.string.bug_report_inbox_title), "bug", "report", "issue", "status", "reply", "comment", "support") {
                 BugReportThreadsSettings(
                     state = state.bugReportThreads,
@@ -1673,6 +1675,7 @@ private fun SettingsContent(
                     onComment = viewModel::commentOnBugReport,
                 )
             }
+    }
     CategorySettingsSection(selectedCategory, SettingsCategory.TvPairing, searchQuery, stringResource(R.string.tv_pair_settings_title), "tv", "pair", "phone", "qr", "code", "network") {
                 LocalTvSettingsPanel(
                     state = state,
@@ -2171,11 +2174,15 @@ private fun CategorySettingsSection(
 private fun settingsCategories(developerOptionsUnlocked: Boolean): List<SettingsCategory> =
     SettingsCategory.entries.filter {
         it != SettingsCategory.TvPairing &&
+            (it != SettingsCategory.BugReports || BuildConfig.UPSTREAM_BUG_REPORTS_ENABLED) &&
             (it != SettingsCategory.Developer || developerOptionsUnlocked)
     }
 
 private fun settingsDetailCategories(developerOptionsUnlocked: Boolean): List<SettingsCategory> =
-    SettingsCategory.entries.filter { it != SettingsCategory.Developer || developerOptionsUnlocked }
+    SettingsCategory.entries.filter {
+        (it != SettingsCategory.Developer || developerOptionsUnlocked) &&
+            (it != SettingsCategory.BugReports || BuildConfig.UPSTREAM_BUG_REPORTS_ENABLED)
+    }
 
 private fun settingsCategoryParent(category: SettingsCategory?): SettingsCategory? =
     if (category == SettingsCategory.TvPairing) SettingsCategory.Account else null

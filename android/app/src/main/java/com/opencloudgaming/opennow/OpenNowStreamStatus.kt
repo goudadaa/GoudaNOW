@@ -1,5 +1,7 @@
 package com.opencloudgaming.opennow
 
+import com.opencloudgaming.opennow.tv.LocalTvSwitchSkin
+import com.opencloudgaming.opennow.tv.TvStreamExitConfirmation
 import android.content.Context
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
@@ -1294,6 +1296,11 @@ internal fun StreamExitConfirmation(
     onExit: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    // GoudaNOW TV: Switch-style view over the same callbacks. Never provided on phones.
+    if (LocalTvSwitchSkin.current) {
+        TvStreamExitConfirmation(gameTitle, onKeepPlaying, onExit)
+        return
+    }
     val keepPlayingFocusRequester = remember { FocusRequester() }
     LaunchedEffect(Unit) {
         delay(80)

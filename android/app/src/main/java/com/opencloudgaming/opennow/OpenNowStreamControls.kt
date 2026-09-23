@@ -1,5 +1,9 @@
 package com.opencloudgaming.opennow
 
+import com.opencloudgaming.opennow.tv.LocalTvSwitchSkin
+import com.opencloudgaming.opennow.tv.TvNoActiveStream
+import com.opencloudgaming.opennow.tv.TvStreamQuickMenu
+import com.opencloudgaming.opennow.tv.TvStreamGuide
 import android.content.res.Configuration
 import android.provider.Settings
 import androidx.annotation.StringRes
@@ -203,6 +207,11 @@ internal fun NoActiveStreamScreen(
     onResumeSession: () -> Unit,
     onEndSession: () -> Unit,
 ) {
+    // GoudaNOW TV: Switch-style view over the same callbacks. Never provided on phones.
+    if (LocalTvSwitchSkin.current) {
+        TvNoActiveStream(canResumeSession, canEndSession, onBack, onResumeSession, onEndSession)
+        return
+    }
     Column(
         Modifier
             .fillMaxSize()
@@ -293,6 +302,11 @@ internal fun StreamFirstLaunchGuide(
     onOpenControls: () -> Unit,
     onSkip: () -> Unit,
 ) {
+    // GoudaNOW TV: Switch-style tutorial over the same callbacks. Never provided on phones.
+    if (LocalTvSwitchSkin.current) {
+        TvStreamGuide(step, controlsOpen, onOpenControls, onSkip)
+        return
+    }
     val primaryFocusRequester = remember { FocusRequester() }
     val overlayInteraction = remember { MutableInteractionSource() }
     LaunchedEffect(step, controlsOpen) {
@@ -753,6 +767,29 @@ internal fun StreamControlsPanel(
     highlightDone: Boolean = false,
     onClose: () -> Unit,
 ) {
+    // GoudaNOW TV: Switch-style view over the same callbacks. Never provided on phones.
+    if (LocalTvSwitchSkin.current) {
+        TvStreamQuickMenu(
+            gameTitle = gameTitle,
+            status = status,
+            audioMuted = audioMuted,
+            microphoneRequested = microphoneRequested,
+            microphoneEnabled = microphoneEnabled,
+            statsVisible = statsVisible,
+            controllerMouseEmulationEnabled = controllerMouseEmulationEnabled,
+            onResume = onClose,
+            onAudioToggle = onAudioToggle,
+            onMicrophoneToggle = onMicrophoneToggle,
+            onStatsToggle = onStatsToggle,
+            onKeyboardOpen = onKeyboardOpen,
+            onSteamMenuOpen = onSteamMenuOpen,
+            onControllerMouseEmulationToggle = onControllerMouseEmulationToggle,
+            onEsc = onEsc,
+            onQuit = onExit,
+            onButtonTone = onButtonTone,
+        )
+        return
+    }
     val doneFocusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
     var page by remember { mutableStateOf(StreamControlsPage.Main) }

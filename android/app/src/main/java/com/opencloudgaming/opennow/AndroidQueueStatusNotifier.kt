@@ -49,7 +49,7 @@ class AndroidQueueStatusNotifier(context: Context) {
         // Send a one-shot high-priority heads-up alert only after an observed queue finishes.
         if (!queueReadyAlertSent && queueFinished) {
             queueReadyAlertSent = true
-            val readyTitle = state.streamGame?.title ?: "OpenNOW"
+            val readyTitle = state.streamGame?.title ?: "GoudaNOW"
             AndroidServiceCommandDispatcher.dispatch("queue-ready-alert") {
                 if (canPostNotifications()) {
                     ensureQueueAlertChannel(appContext)
@@ -68,7 +68,7 @@ class AndroidQueueStatusNotifier(context: Context) {
         }
         cancellationApplied = false
 
-        val title = state.streamGame?.title ?: "OpenNOW"
+        val title = state.streamGame?.title ?: "GoudaNOW"
         val text = localizedQueueLaunchStatusText(appContext, state)
         if (serviceStartRequested && activeTitle == title && activeText == text) return
         serviceStartRequested = true
@@ -144,18 +144,18 @@ class AndroidQueueStatusService : Service() {
         runCatching {
             when (intent?.action) {
                 QUEUE_SERVICE_ACTION_STOP -> {
-                    startQueueForeground("OpenNOW", localizedAndroidContext(this).getString(R.string.queue_status))
+                    startQueueForeground("GoudaNOW", localizedAndroidContext(this).getString(R.string.queue_status))
                     ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
                     stopSelf(startId)
                 }
                 QUEUE_SERVICE_ACTION_UPDATE, null -> {
-                    val title = intent?.getStringExtra(QUEUE_SERVICE_EXTRA_TITLE) ?: "OpenNOW"
+                    val title = intent?.getStringExtra(QUEUE_SERVICE_EXTRA_TITLE) ?: "GoudaNOW"
                     val text = intent?.getStringExtra(QUEUE_SERVICE_EXTRA_TEXT)
                         ?: localizedAndroidContext(this).getString(R.string.queue_status)
                     startQueueForeground(title, text)
                 }
                 else -> {
-                    startQueueForeground("OpenNOW", localizedAndroidContext(this).getString(R.string.queue_status))
+                    startQueueForeground("GoudaNOW", localizedAndroidContext(this).getString(R.string.queue_status))
                     ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
                     stopSelf(startId)
                 }
@@ -194,7 +194,7 @@ private fun ensureQueueNotificationChannel(context: Context) {
         "Queue status",
         NotificationManager.IMPORTANCE_LOW,
     ).apply {
-        description = "Shows OpenNOW queue and session startup progress."
+        description = "Shows GoudaNOW queue and session startup progress."
         lockscreenVisibility = Notification.VISIBILITY_PUBLIC
         setShowBadge(false)
     }
@@ -224,7 +224,7 @@ private fun buildQueueNotification(context: Context, title: String, text: String
         .setSmallIcon(QUEUE_NOTIFICATION_SMALL_ICON)
         .setContentTitle(title)
         .setContentText(text)
-        .setSubText("OpenNOW")
+        .setSubText("GoudaNOW")
         .setCategory(Notification.CATEGORY_PROGRESS)
         .setProgress(0, 0, true)
         .setVisibility(Notification.VISIBILITY_PUBLIC)
@@ -274,7 +274,7 @@ private fun buildQueueReadyNotification(context: Context, gameTitle: String): No
         .setSmallIcon(QUEUE_NOTIFICATION_SMALL_ICON)
         .setContentTitle(localizedAndroidContext(context).getString(R.string.queue_ready_title, gameTitle))
         .setContentText(localizedAndroidContext(context).getString(R.string.queue_ready_body))
-        .setSubText("OpenNOW")
+        .setSubText("GoudaNOW")
         .setCategory(Notification.CATEGORY_ALARM)
         .setVisibility(Notification.VISIBILITY_PUBLIC)
         .setOngoing(false)

@@ -61,3 +61,8 @@ result
 
 /android/app/.cxx
 /android/app/release
+
+# GoudaNOW: Play upload signing key - never commit
+android/keystore
+*.jks
+*.keystore

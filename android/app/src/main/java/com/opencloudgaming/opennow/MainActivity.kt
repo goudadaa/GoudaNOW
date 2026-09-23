@@ -29,6 +29,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -49,8 +50,12 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class MainActivity : ComponentActivity() {
-    private val viewModel: OpenNowViewModel by viewModels()
+/**
+ * Owns the app window: stream system UI, PiP, refresh-rate switching, and controller input routing.
+ * [com.opencloudgaming.opennow.tv.TvMainActivity] reuses all of that and swaps only [AppContent].
+ */
+open class MainActivity : ComponentActivity() {
+    protected val viewModel: OpenNowViewModel by viewModels()
     private val mascotActivity = MascotActivityTracker()
     private val queueStatusNotifier by lazy { AndroidQueueStatusNotifier(this) }
     private val streamKeepAliveNotifier by lazy { AndroidStreamKeepAliveNotifier(this) }
@@ -100,7 +105,7 @@ class MainActivity : ComponentActivity() {
             }
             if (ready) {
                 CompositionLocalProvider(LocalMascotActivity provides mascotActivity) {
-                    OpenNowApp(
+                    AppContent(
                         viewModel = viewModel,
                         onMicrophoneCaptureActiveChange = streamKeepAliveNotifier::setMicrophoneCaptureActive,
                     )
@@ -161,6 +166,18 @@ class MainActivity : ComponentActivity() {
         } else {
             window.clearFlags(WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER)
         }
+    }
+
+    /** Root composable for this window. Subclasses replace the shell UI, never the stream plumbing. */
+    @Composable
+    protected open fun AppContent(
+        viewModel: OpenNowViewModel,
+        onMicrophoneCaptureActiveChange: (Boolean) -> Unit,
+    ) {
+        OpenNowApp(
+            viewModel = viewModel,
+            onMicrophoneCaptureActiveChange = onMicrophoneCaptureActiveChange,
+        )
     }
 
     override fun onNewIntent(intent: Intent) {

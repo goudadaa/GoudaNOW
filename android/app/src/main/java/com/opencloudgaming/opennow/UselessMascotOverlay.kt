@@ -155,7 +155,7 @@ private fun BouncingMascot() {
             }
         }
         Image(
-            painter = painterResource(R.drawable.opennow_icon),
+            painter = painterResource(R.drawable.goudanow_icon),
             contentDescription = null,
             contentScale = ContentScale.Fit,
             modifier = Modifier.size(MASCOT_SIZE_DP.dp).graphicsLayer {

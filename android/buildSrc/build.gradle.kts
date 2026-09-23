@@ -7,7 +7,7 @@ repositories {
 
 dependencies {
     // Keep aligned with the Android plugin in ../build.gradle.kts.
-    implementation("com.android.tools.build:gradle-api:9.4.0") {
+    implementation("com.android.tools.build:gradle-api:9.4.1") {
         // The app supplies the plugins; loading them here shadows its Kotlin/AGP versions.
         exclude(group = "com.android.tools.build", module = "gradle")
         exclude(group = "org.jetbrains.kotlin", module = "kotlin-gradle-plugin-api")

@@ -171,6 +171,7 @@ internal fun buildAndroidBugReportRequest(
     report: AndroidBugReport,
     endpoint: String = ANDROID_BUG_REPORT_ENDPOINT,
 ): Request {
+    check(BuildConfig.UPSTREAM_BUG_REPORTS_ENABLED) { BUG_REPORTS_UNAVAILABLE_MESSAGE }
     val title = report.title.trim()
     val description = report.description.trim()
     androidBugReportTitleError(title)?.let { error -> throw IllegalArgumentException(error) }

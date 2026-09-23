@@ -7,8 +7,8 @@
     <string name="profile_account_options">Account options</string>
     <string name="profile_identity">%1$s • %2$s</string>
     <string name="profile_not_available">Not available</string>
-    <string name="app_name">OpenNOW</string>
-    <string name="status_starting_opennow">Starting OpenNOW</string>
+    <string name="app_name">GoudaNOW</string>
+    <string name="status_starting_opennow">Starting GoudaNOW</string>
     <string name="login_with_provider">Sign in with %1$s</string>
     <string name="login_tv_start">Sign in on another device with %1$s</string>
     <string name="login_tv_title">Use this code to sign in</string>
@@ -77,7 +77,7 @@
 
     <!-- Developer options -->
     <string name="dev_notice_title">For development and support</string>
-    <string name="dev_notice_body">These actions only reset OpenNOW\'s own local state and show information already in the diagnostics export. Destructive ones ask first. You can hide this page again from the bottom of the list.</string>
+    <string name="dev_notice_body">These actions only reset GoudaNOW\'s own local state and show information already in the diagnostics export. Destructive ones ask first. You can hide this page again from the bottom of the list.</string>
     <string name="dev_section_flows">Flows and prompts</string>
     <string name="dev_section_catalog">Catalogue and stores</string>
     <string name="dev_section_stream">Stream</string>
@@ -132,10 +132,10 @@
     <string name="dev_check_update_desc">Runs the update check immediately</string>
     <string name="dev_sign_out_all">Sign out of every account</string>
     <string name="dev_sign_out_all_desc">%1$d saved</string>
-    <string name="dev_sign_out_all_confirm">Every saved account is removed from this device and OpenNOW returns to the sign-in screen.</string>
+    <string name="dev_sign_out_all_confirm">Every saved account is removed from this device and GoudaNOW returns to the sign-in screen.</string>
     <string name="dev_wipe_app_data">Wipe app data and relaunch</string>
-    <string name="dev_wipe_app_data_desc">Returns OpenNOW to a fresh install</string>
-    <string name="dev_wipe_app_data_confirm">Accounts, settings, cached games, and local files are deleted, and OpenNOW relaunches like a fresh install. This cannot be undone.</string>
+    <string name="dev_wipe_app_data_desc">Returns GoudaNOW to a fresh install</string>
+    <string name="dev_wipe_app_data_confirm">Accounts, settings, cached games, and local files are deleted, and GoudaNOW relaunches like a fresh install. This cannot be undone.</string>
     <string name="dev_lock">Hide developer options</string>
     <string name="dev_lock_desc">Tap the build number in About ten times to bring it back</string>
     <string name="dev_env_build">Build</string>
@@ -325,8 +325,8 @@
     <string name="stream_panel_direct_click">Direct click</string>
     <string name="stream_panel_touch_controller">Touch controller</string>
     <string name="stream_touch_builtin_title">Built-in game touch detected</string>
-    <string name="stream_touch_builtin_available">This game supports built-in touch controls. You can still turn on OpenNOW’s touch controller below if you prefer.</string>
-    <string name="stream_touch_builtin_overridden">This game supports built-in touch controls. OpenNOW’s touch controller is enabled for this session.</string>
+    <string name="stream_touch_builtin_available">This game supports built-in touch controls. You can still turn on GoudaNOW’s touch controller below if you prefer.</string>
+    <string name="stream_touch_builtin_overridden">This game supports built-in touch controls. GoudaNOW’s touch controller is enabled for this session.</string>
     <string name="stream_touch_builtin_active">Built-in active</string>
     <string name="stream_panel_joysticks">Joysticks</string>
     <string name="stream_panel_joystick_fixed">Fixed</string>
@@ -521,7 +521,7 @@
     <string name="settings_color_desc">8-bit 4:2:0 is the lightest and most compatible. 10-bit improves gradients but adds decoder and bandwidth requirements. Android normalizes unsupported combinations automatically.</string>
     <string name="settings_av1_ten_bit_badge">H.264/H.265 only</string>
     <string name="settings_av1_ten_bit_hint">AV1 uses 8-bit color. Choose H.265 for 10-bit and HDR on compatible displays.</string>
-    <string name="settings_av1_ten_bit_downgraded">AV1 uses 8-bit color in OpenNOW. Switched to 8-bit and disabled HDR. Choose H.265 or H.264 to use 10-bit.</string>
+    <string name="settings_av1_ten_bit_downgraded">AV1 uses 8-bit color in GoudaNOW. Switched to 8-bit and disabled HDR. Choose H.265 or H.264 to use 10-bit.</string>
     <string name="settings_hdr">HDR (Performance &amp; Ultimate)</string>
     <string name="settings_hdr_desc">HDR10 requires a compatible display and hardware H.265 decoder, up to 4K at 60 FPS, and a supported membership. Video uses the display’s HDR processing; sharpening is unavailable in HDR.</string>
     <string name="settings_hdr_android_handheld_hint">HDR requires an HDR10 display reporting its luminance range and a hardware H.265 Main10 decoder for the selected resolution and FPS.</string>
@@ -541,12 +541,12 @@
     <string name="settings_experimental_streaming">Experimental streaming</string>
     <string name="settings_experimental_streaming_warning">May cause session launch failures.</string>
     <string name="settings_hdr_ten_bit_badge">Unavailable with HDR</string>
-    <string name="settings_hdr_ten_bit_warning">GFN servers cannot process 10-bit color while HDR is enabled. OpenNOW forces 8-bit 4:2:0 for HDR sessions.</string>
+    <string name="settings_hdr_ten_bit_warning">GFN servers cannot process 10-bit color while HDR is enabled. GoudaNOW forces 8-bit 4:2:0 for HDR sessions.</string>
     <string name="settings_advanced_controller_customization">Advanced controller customization</string>
     <string name="settings_advanced_controller_customization_desc">Show button mapping, visibility, gyro, size, opacity, and layout controls.</string>
     <string name="settings_battery_optimization_title">Battery optimization</string>
     <string name="battery_queue_prompt_title">Allow background streaming?</string>
-    <string name="battery_queue_prompt_body">Battery optimization can interrupt %1$s while you queue or stream. Allow OpenNOW to run without battery restrictions before continuing?</string>
+    <string name="battery_queue_prompt_body">Battery optimization can interrupt %1$s while you queue or stream. Allow GoudaNOW to run without battery restrictions before continuing?</string>
     <string name="battery_queue_prompt_continue">No, continue</string>
     <string name="launch_recovery_title">Session couldn’t start</string>
     <string name="launch_recovery_lower_settings_body">GFN rejected this stream profile before gameplay began. You can retry once with 1080p, 60 FPS, H.264, 8-bit SDR, and experimental transport features off.</string>
@@ -555,15 +555,15 @@
     <string name="settings_l4s_desc">Requests NVIDIA\'s low-latency, low-loss transport path when the server and network support it. Leave off if your network gets unstable.</string>
     <string name="settings_microphone">Microphone</string>
     <string name="settings_microphone_desc">Sends your default Android microphone to the streamed game. You can mute it from Stream Controls.</string>
-    <string name="settings_microphone_permission_denied">Microphone permission was not granted. OpenNOW will keep microphone streaming off.</string>
+    <string name="settings_microphone_permission_denied">Microphone permission was not granted. GoudaNOW will keep microphone streaming off.</string>
     <string name="settings_dynamic_color">Use system colors</string>
     <string name="settings_accent">Accent</string>
     <string name="settings_local_apps">Add my own apps</string>
     <string name="settings_local_apps_desc">Show a Library shelf where you can add, launch, and remove installed Android apps and games.</string>
     <string name="settings_default_launcher">Make this your default launcher</string>
-    <string name="settings_default_launcher_desc">Open Android\'s launcher chooser so OpenNOW can become the Home screen. You can change this again in Android settings.</string>
+    <string name="settings_default_launcher_desc">Open Android\'s launcher chooser so GoudaNOW can become the Home screen. You can change this again in Android settings.</string>
     <string name="settings_default_launcher_action">Choose launcher</string>
-    <string name="settings_default_launcher_selected">OpenNOW is the default</string>
+    <string name="settings_default_launcher_selected">GoudaNOW is the default</string>
     <string name="settings_default_launcher_manage">Manage</string>
     <string name="library_local_apps">My own apps</string>
     <string name="library_add_local_app">Add app</string>
@@ -669,7 +669,7 @@
     <string name="settings_stream_sharpening_desc">Applies an extra GPU filter after decoding. It can improve perceived detail but may add rendering load on slower devices.</string>
     <string name="settings_stream_sharpening_amount_desc">Controls the strength of the post-processing sharpening filter. It does not change the source stream resolution.</string>
     <string name="settings_session_counter">Smart session timer</string>
-    <string name="settings_thanks_body">Thanks to the people helping improve OpenNOW for everyone.</string>
+    <string name="settings_thanks_body">Thanks to the people helping improve GoudaNOW for everyone.</string>
     <string name="settings_thanks_darkevilpt">DarkevilPT</string>
     <string name="settings_thanks_darkevilpt_note">Community support</string>
     <string name="settings_donate">Donate</string>
@@ -741,7 +741,7 @@
     <string name="setup_streaming_custom_desc">Choose resolution, codec, frame rate, and bitrate below</string>
     <string name="setup_streaming_membership">%1$s membership</string>
     <string name="setup_streaming_membership_ceiling">Your plan streams up to %1$s at %2$d FPS. Higher options are listed with the tier that unlocks them.</string>
-    <string name="setup_streaming_membership_upgrade">Upgrading your GeForce NOW membership raises this ceiling — OpenNOW does not cap it.</string>
+    <string name="setup_streaming_membership_upgrade">Upgrading your GeForce NOW membership raises this ceiling — GoudaNOW does not cap it.</string>
 
     <string name="setup_play_title">During play</string>
     <string name="setup_play_subtitle">Choose the controls and status you want during a stream.</string>
@@ -816,7 +816,7 @@
 
     <string name="membership_gate_title">Needs %1$s</string>
     <string name="membership_gate_body">GeForce NOW lists %1$s as %2$s only, and this account is on %3$s. The session will most likely be refused or dropped to a lower profile.</string>
-    <string name="membership_gate_hint">Entitlement is decided by GeForce NOW, not by OpenNOW, and the catalogue is sometimes out of date — so you can still try.</string>
+    <string name="membership_gate_hint">Entitlement is decided by GeForce NOW, not by GoudaNOW, and the catalogue is sometimes out of date — so you can still try.</string>
     <string name="membership_gate_continue">Try anyway</string>
 
     <!-- Extracted from Compose call sites for 1.4.0; keep in sync with every values-*/strings.xml -->
@@ -847,9 +847,9 @@
     <string name="bug_report_description_label">What happened?</string>
     <string name="bug_report_description_placeholder">What were you doing, what went wrong, and can you reproduce it?</string>
     <string name="bug_report_english_required">English language required</string>
-    <string name="bug_report_english_required_body">Set either OpenNOW or the device language to English before reporting.</string>
+    <string name="bug_report_english_required_body">Set either GoudaNOW or the device language to English before reporting.</string>
     <string name="bug_report_inline_subtitle">Describe the problem without leaving your game.</string>
-    <string name="bug_report_known_issue_override">I understand OpenNOW found a likely cause. Send anyway; I may lose future reporting access.</string>
+    <string name="bug_report_known_issue_override">I understand GoudaNOW found a likely cause. Send anyway; I may lose future reporting access.</string>
     <string name="bug_report_matched_suggestions">MATCHED SUGGESTIONS</string>
     <string name="bug_report_no_suggestions">No irrelevant fixes are being suggested for this check.</string>
     <string name="bug_report_preflight_subtitle">Live checks from this device and session</string>
@@ -870,7 +870,7 @@
     <string name="bug_report_upload_action">Upload report</string>
     <string name="bug_report_upload_confirm_title">Upload bug report?</string>
     <string name="bug_report_uploading">Uploading report…</string>
-    <string name="bug_report_use_english">Use English for OpenNOW</string>
+    <string name="bug_report_use_english">Use English for GoudaNOW</string>
     <string name="catalog_checking_queues">Checking PrintedWaste queues and latency</string>
     <string name="catalog_description">Description</string>
     <string name="catalog_filters">Filters</string>
@@ -880,7 +880,7 @@
     <string name="common_details">Details</string>
     <string name="diagnostics_clipboard_body">Device, account type, stream profile, current status, and the temporary paste URL were copied to the clipboard.</string>
     <string name="diagnostics_copied_title">Diagnostics copied</string>
-    <string name="diagnostics_create_body">OpenNOW will remove tokens, account identifiers, email addresses, session IDs, and network addresses before uploading.</string>
+    <string name="diagnostics_create_body">GoudaNOW will remove tokens, account identifiers, email addresses, session IDs, and network addresses before uploading.</string>
     <string name="diagnostics_create_caveat">The randomized link is unlisted but not encrypted, and the paste service deletes uploads within 24 hours.</string>
     <string name="diagnostics_create_title">Create temporary diagnostics paste?</string>
     <string name="diagnostics_preparing_body">Removing sensitive values and creating a temporary paste…</string>
@@ -898,7 +898,7 @@
     <string name="login_logs_exported">Logs exported</string>
     <string name="login_pairing_code">PAIRING CODE</string>
     <string name="login_tagline">Native Android GeForce NOW client</string>
-    <string name="login_token_body">Paste an NVIDIA access token or token-response JSON. OpenNOW verifies the access token before saving the account.</string>
+    <string name="login_token_body">Paste an NVIDIA access token or token-response JSON. GoudaNOW verifies the access token before saving the account.</string>
     <string name="login_token_title">Sign in with token</string>
     <string name="login_token_warning">Only use credentials for an account you control.</string>
     <string name="login_tools_body">Use a token to sign in without the browser, or export diagnostics before signing in.</string>
@@ -927,8 +927,8 @@
     <string name="settings_developer_label">Developer</string>
     <string name="settings_no_storage_addon">No persistent storage add-on is active for this account.</string>
     <string name="settings_release_notes">Release notes</string>
-    <string name="settings_reset_body">Accounts, settings, cached games, tutorial state, and local app files will be removed. OpenNOW will relaunch like a fresh install.</string>
-    <string name="settings_reset_explainer">Reset tutorial only makes the stream guide appear again. Reset settings is destructive: it clears local app data and relaunches OpenNOW.</string>
+    <string name="settings_reset_body">Accounts, settings, cached games, tutorial state, and local app files will be removed. GoudaNOW will relaunch like a fresh install.</string>
+    <string name="settings_reset_explainer">Reset tutorial only makes the stream guide appear again. Reset settings is destructive: it clears local app data and relaunches GoudaNOW.</string>
     <string name="settings_reset_title">Reset settings and app data?</string>
     <string name="settings_select_provider">Select the GeForce NOW provider to use for the new account.</string>
     <string name="settings_storage_usage">Storage usage</string>
@@ -938,7 +938,7 @@
     <string name="stream_diag_confirm_body">This sends the profile-change summary and likely cause to PrintedWaste and OpenNOW maintainers so they can investigate it.</string>
     <string name="stream_diag_confirm_title">Send stream diagnostics?</string>
     <string name="stream_diag_send">Send diagnostics</string>
-    <string name="stream_no_local_stream">OpenNOW does not have a local stream attached right now.</string>
+    <string name="stream_no_local_stream">GoudaNOW does not have a local stream attached right now.</string>
     <string name="stream_profile_changed_title">Stream profile changed</string>
     <string name="stream_profile_changed_why">Why it happened</string>
     <string name="stream_profile_sending">Sending the report and redacted diagnostics…</string>
@@ -948,7 +948,7 @@
     <string name="stream_text_placeholder">Type or edit stream text</string>
     <string name="toast_cache_already_clear">Game cache was already clear</string>
     <string name="toast_cache_cleared">Cleared game cache</string>
-    <string name="toast_clearing_app_data">Clearing app data and relaunching OpenNOW</string>
+    <string name="toast_clearing_app_data">Clearing app data and relaunching GoudaNOW</string>
     <string name="toast_signed_in_from_phone">Signed in securely from phone</string>
     <string name="toast_store_disconnected">Store disconnected</string>
     <string name="toast_tutorial_reset">Tutorial will show on the next stream</string>

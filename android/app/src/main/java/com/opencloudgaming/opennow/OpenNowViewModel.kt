@@ -205,6 +205,10 @@ data class DiagnosticShareState(
     val error: String? = null,
 )
 
+/** GoudaNOW is a fork: reports would reach OpenNOW's maintainers, so sending is switched off. */
+internal const val BUG_REPORTS_UNAVAILABLE_MESSAGE =
+    "Bug reports aren't available in GoudaNOW. Please report problems on the GoudaNOW GitHub page."
+
 @Immutable
 data class BugReportSubmissionState(
     val uploading: Boolean = false,
@@ -663,6 +667,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
     }
 
     suspend fun checkAppMessage() {
+        if (!BuildConfig.UPSTREAM_ANNOUNCEMENTS_ENABLED) return
         if (state.value.isAndroidUpdateCheckBlockedByStream()) return
         if (!appMessageMutex.tryLock()) return
         try {
@@ -1084,6 +1089,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun requestDiagnosticShare() {
+        if (!BuildConfig.UPSTREAM_BUG_REPORTS_ENABLED) return
         _state.update {
             it.copy(diagnosticShare = DiagnosticShareState(awaitingConsent = true))
         }
@@ -1095,6 +1101,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun refreshBugReportThreads() {
+        if (!BuildConfig.UPSTREAM_BUG_REPORTS_ENABLED) return
         val threadState = state.value.bugReportThreads
         // A refresh used to replace the state while a reply was in flight, re-enabling the Send
         // button and making it possible to post the same comment twice.
@@ -1141,6 +1148,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun commentOnBugReport(reportId: String, comment: String) {
+        if (!BuildConfig.UPSTREAM_BUG_REPORTS_ENABLED) return
         if (state.value.bugReportThreads.postingReportId != null) return
         if (state.value.bugReportThreads.reports.any { it.id == reportId && androidBugReportThreadClosed(it.status) }) {
             _state.update {
@@ -1210,6 +1218,12 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
         details: AndroidBugReportDetails = AndroidBugReportDetails(),
         additionalFiles: List<AndroidBugReportAttachment> = emptyList(),
     ) {
+        if (!BuildConfig.UPSTREAM_BUG_REPORTS_ENABLED) {
+            _state.update {
+                it.copy(bugReportSubmission = BugReportSubmissionState(error = BUG_REPORTS_UNAVAILABLE_MESSAGE))
+            }
+            return
+        }
         if (state.value.bugReportSubmission.uploading) return
         val snapshot = state.value
         val versionBlock = androidBugReportBlockMessage(
@@ -1301,6 +1315,7 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun verifyBugReportVersion() {
+        if (!BuildConfig.UPSTREAM_BUG_REPORTS_ENABLED) return
         val snapshot = state.value
         if (!snapshot.androidUpdate.installSource.isGooglePlay) return
         if (bugReportUpdateVerificationJob?.isActive == true) return
@@ -1526,6 +1541,10 @@ class OpenNowViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun uploadDiagnosticShare() {
+        if (!BuildConfig.UPSTREAM_BUG_REPORTS_ENABLED) {
+            _state.update { it.copy(diagnosticShare = DiagnosticShareState(error = BUG_REPORTS_UNAVAILABLE_MESSAGE)) }
+            return
+        }
         if (state.value.diagnosticShare.uploading) return
         _state.update {
             it.copy(diagnosticShare = DiagnosticShareState(uploading = true))
